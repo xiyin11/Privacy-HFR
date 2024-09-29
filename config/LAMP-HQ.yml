@@ -1,0 +1,36 @@
+datasets:
+  name: LAMP_HQ
+  root: /YOUR/DATASETS/PATH/LAMP-HQ
+  size: 128
+train: 
+  model: LightCNN-29v4
+  lr: 0.001
+  pre_lr: 0.02
+  moentum: 0.9
+  weight_decay: 0.0001
+  batch_size: 186
+  workers: 8
+  pre_epoch: 2
+  dropout_rate: 0.6
+  max_dropout: 0.95
+  adjust_lr: 30
+  adjust_dropout: 5
+  epochs: 80
+  val_frep: 3
+  sub_channels: [0]
+  resume: PRETRAIN/WEIGHT/PATH
+  protocols: [datasets/LAMP-HQ/Protocol/train/train_fold1.txt]
+val:
+  gallery: [datasets/LAMP-HQ/Protocol/test/gallery_vis1.txt]
+  probe: [datasets/LAMP-HQ/Protocol/test/probe_nir1.txt]
+  weight: YOUR/CHECKPOINT/PATH
+logs:
+  output_path: logs/LAMP-HQ/
+  print_freq: 50
+avih:
+  resume: YOUR/CHECKPOINT/PATH
+  alpha: 0.02
+  num_iter: 1605
+  batch_size: 128
+  protocols: [datasets/LAMP-HQ/Protocol/gallery.txt, datasets/LAMP-HQ/Protocol/probe.txt]
+  adv_size: [128,128]

@@ -1,0 +1,36 @@
+datasets:
+  name: Tufts
+  root: /YOUR/DATASETS/PATH/Tufts/
+  size: 128
+train: 
+  model: LightCNN-29v4
+  lr: 0.001
+  pre_lr: 0.02
+  moentum: 0.9
+  weight_decay: 0.0001
+  batch_size: 186
+  workers: 8
+  pre_epoch: 5
+  dropout_rate: 0.6
+  max_dropout: 0.95
+  adjust_lr: 30
+  adjust_dropout: 5
+  epochs: 80
+  val_frep: 3
+  sub_channels: [ 0 ]
+  resume: PRETRAIN/WEIGHT/PATH
+  protocols: [datasets/Tufts/Protocol/train.txt]
+val:
+  gallery: [datasets/Tufts/Protocol/gallery_small.txt]
+  probe: [datasets/Tufts/Protocol/probe.txt]
+  weight: YOUR/CHECKPOINT/PATH
+logs:
+  output_path: logs/Tufts/
+  print_freq: 50
+avih:
+  resume: YOUR/CHECKPOINT/PATH
+  alpha: 0.02
+  num_iter: 1200
+  batch_size: 150
+  protocols: [datasets/Tufts/Protocol/gallery_small.txt, datasets/Tufts/Protocol/probe.txt]
+  adv_size: [128,128]
