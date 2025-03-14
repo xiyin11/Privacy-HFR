@@ -1,0 +1,40 @@
+datasets:
+  name: NIR_VISv2
+  root: /data/datasets/NIR_VISv2/
+  size: 128
+  num_classes: 357
+train: 
+  model: LightCNN-29v4
+  lr: 0.001
+  pre_lr: 0.02
+  moentum: 0.9
+  weight_decay: 0.0001
+  batch_size: 186
+  workers: 8
+  pre_epoch: 5
+  dropout_rate: 0.6
+  max_dropout: 0.95
+  adjust_lr: 30
+  adjust_dropout: 5
+  epochs: 80
+  val_frep: 3
+  sub_channels: [ 0 ]
+  resume: model/weight/LightCNN-V4_checkpoint.pth.tar
+  protocols: [datasets/NIR-VISv2/Protocol/nir_train_dev.txt, datasets/NIR-VISv2/Protocol/vis_train_dev.txt]
+val:
+  gallery: [datasets/NIR-VISv2/Protocol/vis_gallery_dev.txt]
+  probe: [datasets/NIR-VISv2/Protocol/nir_probe_dev.txt]
+  weight: best_weight/NIR_VISv2_99.363.ckpt
+  root: logs/casia/2024-03-26
+
+logs:
+  output_path: logs/NIR-VISv2/
+  print_freq: 50
+avih:
+  resume: best_weight/NIR_VISv2_99.363.ckpt
+  alpha: 0.02
+  num_iter: 800
+  batch_size: 150
+  protocols: [datasets/NIR-VISv2/Protocol/nir_probe_dev.txt, datasets/NIR-VISv2/Protocol/vis_gallery_dev.txt]
+  # adv_channel: 3
+  adv_size: [128,128]
